@@ -3,9 +3,9 @@ import { useState, useEffect, Fragment } from "react"
 import styled from "@emotion/styled"
 
 import { TRACKER_LIST } from "../../constants"
+import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
+import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
 import Tracker from "../../core/domains/entities/Tracker"
-import ICarrierViewDTO from "../../adapters/dtos/interfaces/ICarrierViewDTO"
-import ITrackerViewDTO from "../../adapters/dtos/interfaces/ITrackerViewDTO"
 import CloseIcon from "./icons/CloseIcon"
 import TipMessage from "./TipMessage"
 import Footer from "./Footer"
@@ -16,8 +16,8 @@ import ctrl from "../di"
 const Dashboard = () => {
   const [selectBoxOpenIdx, setSelectBoxOpenIdx] = useState(0)
   const [isErrorMessage, setIsErrorMessage] = useState(false)
-  const [trackerList, setTrackerList] = useState<ITrackerViewDTO[]>([])
-  const [carrierList, setCarreirList] = useState<ICarrierViewDTO[]>([])
+  const [trackerList, setTrackerList] = useState<ITrackerDTO[]>([])
+  const [carrierList, setCarreirList] = useState<ICarrierDTO[]>([])
 
   const handleClickBody = () => {
     if (selectBoxOpenIdx === 0) return

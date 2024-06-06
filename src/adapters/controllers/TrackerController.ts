@@ -1,12 +1,8 @@
-import { v4 as uuidv4 } from "uuid"
-import Tracker from "../../core/domains/entities/Tracker"
 import ITrackerUseCase from "../../core/domains/usecases/interfaces/ITrackerUseCase"
 import IDeliveryDTO from "../../core/dtos/interfaces/IDeliveryDTO"
 import ILayerDTO from "../../core/dtos/interfaces/ILayerDTO"
 import ITrackerController from "./interfaces/ITrackerController"
-import ITrackerViewDTO from "../dtos/interfaces/ITrackerViewDTO"
-import TrackerViewDTO from "../dtos/TrackerViewDTO"
-import LayerDTO from "../../core/dtos/LayerDTO"
+import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
 
 export default class TrackerController implements ITrackerController {
   constructor(private readonly trackerUseCase: ITrackerUseCase) {}
@@ -19,90 +15,51 @@ export default class TrackerController implements ITrackerController {
   }
 
   async addTracker(): Promise<ILayerDTO<boolean>> {
-    const newTracker = new Tracker({
-      id: uuidv4()
-    })
-
-    return this.trackerUseCase.addTracker(newTracker)
+    return this.trackerUseCase.addTracker()
   }
 
-  async getTrackers(): Promise<ILayerDTO<ITrackerViewDTO[]>> {
-    const { isError, message, data } = await this.trackerUseCase.getTrackers()
-    if (isError) {
-      return new LayerDTO({
-        isError,
-        message
-      })
-    }
-
-    const trackerViewDTOs = data.map((tracker: ITrackerViewDTO) => {
-      return new TrackerViewDTO({
-        id: tracker.id,
-        carrierId: tracker.carrierId,
-        label: tracker.label,
-        trackingNumber: tracker.trackingNumber,
-        memos: tracker.memos
-      })
-    })
-
-    return new LayerDTO({
-      data: trackerViewDTOs
-    })
+  async getTrackers(): Promise<ILayerDTO<ITrackerDTO[]>> {
+    return await this.trackerUseCase.getTrackers()
   }
 
   async updateCarrierId(
-    tracker: ITrackerViewDTO,
+    tracker: ITrackerDTO,
     newCarrierId: string
   ): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.updateCarrierId(trackerEntitiy, newCarrierId)
+    return this.trackerUseCase.updateCarrierId(tracker, newCarrierId)
   }
 
   async updateLabel(
-    tracker: ITrackerViewDTO,
+    tracker: ITrackerDTO,
     newLabel: string
   ): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.updateLabel(trackerEntitiy, newLabel)
+    return this.trackerUseCase.updateLabel(tracker, newLabel)
   }
 
   async updateTrackingNumber(
-    tracker: ITrackerViewDTO,
+    tracker: ITrackerDTO,
     newTrackingNumber: string
   ): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.updateTrackingNumber(
-      trackerEntitiy,
-      newTrackingNumber
-    )
+    return this.trackerUseCase.updateTrackingNumber(tracker, newTrackingNumber)
   }
 
-  async addMemo(tracker: ITrackerViewDTO): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.addMemo(trackerEntitiy)
+  async addMemo(tracker: ITrackerDTO): Promise<ILayerDTO<boolean>> {
+    return this.trackerUseCase.addMemo(tracker)
   }
 
   async updateMemo(
-    tracker: ITrackerViewDTO,
+    tracker: ITrackerDTO,
     index: number,
     newMemo: string
   ): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.updateMemo(trackerEntitiy, index, newMemo)
+    return this.trackerUseCase.updateMemo(tracker, index, newMemo)
   }
 
   async deleteMemo(
-    tracker: ITrackerViewDTO,
+    tracker: ITrackerDTO,
     index: number
   ): Promise<ILayerDTO<boolean>> {
-    const trackerEntitiy = this.convertToEntity(tracker)
-
-    return this.trackerUseCase.deleteMemo(trackerEntitiy, index)
+    return this.trackerUseCase.deleteMemo(tracker, index)
   }
 
   async deleteTracker(trackerId: string): Promise<ILayerDTO<boolean>> {
@@ -111,15 +68,5 @@ export default class TrackerController implements ITrackerController {
 
   async clearTrackers(): Promise<ILayerDTO<boolean>> {
     return this.trackerUseCase.clearTrackers()
-  }
-
-  protected convertToEntity(trackerViewDTO: ITrackerViewDTO) {
-    return new Tracker({
-      id: trackerViewDTO.id,
-      carrierId: trackerViewDTO.carrierId,
-      label: trackerViewDTO.label,
-      trackingNumber: trackerViewDTO.trackingNumber,
-      memos: trackerViewDTO.memos
-    })
   }
 }

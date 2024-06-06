@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import styled from "@emotion/styled"
 
-import ICarrierViewDTO from "../../adapters/dtos/interfaces/ICarrierViewDTO"
-import ITrackerViewDTO from "../../adapters/dtos/interfaces/ITrackerViewDTO"
+import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
+import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
 import CloseIcon from "./icons/CloseIcon"
 import PlusIcon from "./icons/PlusIcon"
 import ArrowDownIcon from "./icons/ArrowDownIcon"
@@ -10,9 +10,9 @@ import TrackerState from "./TrackerState"
 import ctrl from "../di"
 
 interface IProps {
-  carrierList: ICarrierViewDTO[]
-  carrier: ICarrierViewDTO
-  tracker: ITrackerViewDTO
+  carrierList: ICarrierDTO[]
+  carrier: ICarrierDTO
+  tracker: ITrackerDTO
   index: number
   selectBoxOpenIdx: number
   setSelectBoxOpenIdx(selectBoxOpenIdx: number): void
@@ -88,7 +88,7 @@ const TrackerBox = ({
     getTrackerList()
   }
 
-  const handleClickNewWindowTracker = (carrier: ICarrierViewDTO) => {
+  const handleClickNewWindowTracker = (carrier: ICarrierDTO) => {
     const { popupURL } = carrier
     const { trackingNumber } = tracker
 
@@ -111,7 +111,7 @@ const TrackerBox = ({
     setTrackerState(false)
   }
 
-  const handleClickAddMemo = async (tracker: ITrackerViewDTO) => {
+  const handleClickAddMemo = async (tracker: ITrackerDTO) => {
     const { isError } = await ctrl.tracker.addMemo(tracker)
     if (isError) {
       showErrorMessage()
@@ -246,7 +246,7 @@ const $trackerBox = styled.div`
   background: #fff;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
   &:hover {
-    .delete-btn {
+    & > span {
       opacity: 1;
     }
   }
