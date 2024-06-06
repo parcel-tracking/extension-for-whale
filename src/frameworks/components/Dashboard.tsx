@@ -3,9 +3,9 @@ import { useState, useEffect, Fragment } from "react"
 import styled from "@emotion/styled"
 
 import { TRACKER_LIST } from "../../constants"
-import ICarrier from "../../core/domains/entities/interfaces/ICarrier"
 import Tracker from "../../core/domains/entities/Tracker"
-import ITrackerVO from "../../adapters/vos/interfaces/ITrackerVO"
+import ICarrierViewDTO from "../../adapters/dtos/interfaces/ICarrierViewDTO"
+import ITrackerViewDTO from "../../adapters/dtos/interfaces/ITrackerViewDTO"
 import CloseIcon from "./icons/CloseIcon"
 import TipMessage from "./TipMessage"
 import Footer from "./Footer"
@@ -16,8 +16,8 @@ import ctrl from "../di"
 const Dashboard = () => {
   const [selectBoxOpenIdx, setSelectBoxOpenIdx] = useState(0)
   const [isErrorMessage, setIsErrorMessage] = useState(false)
-  const [trackerList, setTrackerList] = useState<ITrackerVO[]>([])
-  const [carrierList, setCarreirList] = useState<ICarrier[]>([])
+  const [trackerList, setTrackerList] = useState<ITrackerViewDTO[]>([])
+  const [carrierList, setCarreirList] = useState<ICarrierViewDTO[]>([])
 
   const handleClickBody = () => {
     if (selectBoxOpenIdx === 0) return
@@ -137,7 +137,7 @@ const $content = styled.div`
 `
 
 const $title = styled.h1`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   background: #fff;
   margin: 0;

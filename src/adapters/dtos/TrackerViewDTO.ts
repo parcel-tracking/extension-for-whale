@@ -1,6 +1,6 @@
-import ITrackerVO from "./interfaces/ITrackerVO"
+import ITrackerViewDTO from "./interfaces/ITrackerViewDTO"
 
-export default class TrackerVO implements ITrackerVO {
+export default class TrackerViewDTO implements ITrackerViewDTO {
   id: string
   carrierId: string
   label: string

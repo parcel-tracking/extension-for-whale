@@ -1,4 +1,4 @@
-export default interface ITrackerVO {
+export default interface ITrackerViewDTO {
   id: string
   carrierId: string
   label: string

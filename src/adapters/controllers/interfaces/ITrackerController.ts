@@ -1,6 +1,6 @@
 import IDeliveryDTO from "../../../core/dtos/interfaces/IDeliveryDTO"
 import ILayerDTO from "../../../core/dtos/interfaces/ILayerDTO"
-import ITrackerVO from "../../vos/interfaces/ITrackerVO"
+import ITrackerViewDTO from "../../dtos/interfaces/ITrackerViewDTO"
 
 export default interface ITrackerController {
   getDelivery(
@@ -8,26 +8,29 @@ export default interface ITrackerController {
     trackingNumber: string
   ): Promise<ILayerDTO<IDeliveryDTO>>
   addTracker(): Promise<ILayerDTO<boolean>>
-  getTrackers(): Promise<ILayerDTO<ITrackerVO[]>>
+  getTrackers(): Promise<ILayerDTO<ITrackerViewDTO[]>>
   updateCarrierId(
-    tracker: ITrackerVO,
+    tracker: ITrackerViewDTO,
     newCarrierId: string
   ): Promise<ILayerDTO<boolean>>
   updateLabel(
-    tracker: ITrackerVO,
+    tracker: ITrackerViewDTO,
     newLabel: string
   ): Promise<ILayerDTO<boolean>>
   updateTrackingNumber(
-    tracker: ITrackerVO,
+    tracker: ITrackerViewDTO,
     newTrackingNumber: string
   ): Promise<ILayerDTO<boolean>>
-  addMemo(tracker: ITrackerVO): Promise<ILayerDTO<boolean>>
+  addMemo(tracker: ITrackerViewDTO): Promise<ILayerDTO<boolean>>
   updateMemo(
-    tracker: ITrackerVO,
+    tracker: ITrackerViewDTO,
     index: number,
     newMemo: string
   ): Promise<ILayerDTO<boolean>>
-  deleteMemo(tracker: ITrackerVO, index: number): Promise<ILayerDTO<boolean>>
+  deleteMemo(
+    tracker: ITrackerViewDTO,
+    index: number
+  ): Promise<ILayerDTO<boolean>>
   deleteTracker(trackerId: string): Promise<ILayerDTO<boolean>>
   clearTrackers(): Promise<ILayerDTO<boolean>>
 }
