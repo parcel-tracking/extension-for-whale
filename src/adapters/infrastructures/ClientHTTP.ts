@@ -7,19 +7,19 @@ export default class ClientHTTP implements IClientHTTP {
 
   async post(url: string, body: any, options?: RequestInit): Promise<Response> {
     return fetch(url, {
-      ...options,
       method: "POST",
       body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", ...options?.headers }
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      ...options
     })
   }
 
   async put(url: string, body: any, options?: RequestInit): Promise<Response> {
     return fetch(url, {
-      ...options,
       method: "PUT",
       body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", ...options?.headers }
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      ...options
     })
   }
 
