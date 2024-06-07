@@ -1,8 +1,8 @@
 import { API_URL, TRACKER_LIST } from "../../constants"
-import ICarrier from "../../core/domains/entities/interfaces/ICarrier"
 import ITracker from "../../core/domains/entities/interfaces/ITracker"
 import LayerDTO from "../../core/dtos/LayerDTO"
 import TrackerDTO from "../../core/dtos/TrackerDTO"
+import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
 import IDeliveryDTO from "../../core/dtos/interfaces/IDeliveryDTO"
 import ILayerDTO from "../../core/dtos/interfaces/ILayerDTO"
 import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
@@ -20,7 +20,7 @@ export default class TrackerRepository implements ITrackerRepository {
   }
 
   async getDelivery(
-    carrier: ICarrier,
+    carrier: ICarrierDTO,
     trackingNumber: string
   ): Promise<ILayerDTO<IDeliveryDTO>> {
     const { id: carrierId } = carrier

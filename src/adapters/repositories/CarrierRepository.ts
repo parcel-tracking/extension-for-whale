@@ -7,14 +7,13 @@ import IClientHTTP from "../infrastructures/interfaces/IClientHTTP"
 
 export default class CarrierRepository implements ICarrierRepository {
   private readonly clientHTTP: IClientHTTP
-  private carriers: ICarrier[] = []
 
   constructor(clietHTTP: IClientHTTP) {
     this.clientHTTP = clietHTTP
   }
 
   async getCarriers(): Promise<ILayerDTO<ICarrier[]>> {
-    const res = await this.clientHTTP.get(`${API_URL}/carrier`)
+    const res = await this.clientHTTP.get(`${API_URL}/carriers`)
     const { isError, message, data } = await res.json()
 
     if (isError) {
@@ -24,20 +23,24 @@ export default class CarrierRepository implements ICarrierRepository {
       })
     }
 
-    this.carriers = data
     return new LayerDTO({
       data
     })
   }
 
   async getCarrier(carrierId: string): Promise<ILayerDTO<ICarrier>> {
-    if (this.carriers.length === 0) {
-      return
+    const res = await this.clientHTTP.get(`${API_URL}/carrier/${carrierId}`)
+    const { isError, message, data } = await res.json()
+
+    if (isError) {
+      return new LayerDTO({
+        isError,
+        message
+      })
     }
 
-    const carrier = this.carriers.find(({ id }) => id === carrierId)
     return new LayerDTO({
-      data: carrier
+      data
     })
   }
 }
