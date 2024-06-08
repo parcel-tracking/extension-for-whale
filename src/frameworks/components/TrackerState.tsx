@@ -130,7 +130,7 @@ const $stateSummary = styled.div`
 
 const $stateList = styled.div`
   table {
-    th:first-child {
+    th:first-of-type {
       width: 35%;
     }
     td {
