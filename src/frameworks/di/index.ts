@@ -1,15 +1,16 @@
-import ClientHTTP from "../../adapters/infrastructures/ClientHTTP"
-import WebLocalStorage from "../../adapters/infrastructures/WebLocalStorage"
 import controllers from "./controllers"
+import infrastructures from "./infrastructures"
 import repositories from "./repositories"
 import useCases from "./useCases"
 
-const fetch = globalThis.fetch.bind(globalThis)
-const localStorage = globalThis.localStorage
+const httpClient = globalThis.fetch.bind(globalThis)
+const storage = globalThis.localStorage
 
-const clientHTTP = new ClientHTTP(fetch)
-const webStorage = new WebLocalStorage(localStorage)
-const repository = repositories(clientHTTP, webStorage)
+const infrastructure = infrastructures(httpClient, storage)
+const repository = repositories(
+  infrastructure.clientHTTP,
+  infrastructure.webLocalStorage
+)
 const useCase = useCases(repository)
 const controller = controllers(useCase)
 
