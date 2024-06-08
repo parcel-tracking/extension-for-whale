@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid"
 import { useState, useEffect, Fragment } from "react"
 import styled from "@emotion/styled"
 
@@ -12,6 +11,16 @@ import Footer from "./Footer"
 import TrackerBox from "./TrackerBox"
 import AddTrackerBtn from "./AddTrackerBtn"
 import ctrl from "../di"
+
+const generateUUID = (): string => {
+  const template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+
+  return template.replace(/[xy]/g, (c) => {
+    const r = (Date.now() + Math.random() * 16) % 16 | 0
+    const v = c === "x" ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}
 
 const Dashboard = () => {
   const [selectBoxOpenIdx, setSelectBoxOpenIdx] = useState(0)
@@ -56,7 +65,7 @@ const Dashboard = () => {
     const oldObj = JSON.parse(oldData)
     const newTrackers = oldObj.map(({ uid, label, code, memos }) => {
       return new Tracker({
-        id: uuidv4(),
+        id: generateUUID(),
         carrierId: carrierList.find((carrier) => carrier.no === uid).id,
         label: label,
         trackingNumber: code,

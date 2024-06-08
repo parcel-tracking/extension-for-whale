@@ -26,6 +26,7 @@ const TrackerState = ({
       trackerTrackingNumber
     )
     if (isError) {
+      setLoading(false)
       setErrMessage(message)
       return
     }
