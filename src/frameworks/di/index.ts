@@ -4,8 +4,11 @@ import controllers from "./controllers"
 import repositories from "./repositories"
 import useCases from "./useCases"
 
-const clientHTTP = new ClientHTTP()
-const webStorage = new WebLocalStorage()
+const fetch = globalThis.fetch.bind(globalThis)
+const localStorage = globalThis.localStorage
+
+const clientHTTP = new ClientHTTP(fetch)
+const webStorage = new WebLocalStorage(localStorage)
 const repository = repositories(clientHTTP, webStorage)
 const useCase = useCases(repository)
 const controller = controllers(useCase)
