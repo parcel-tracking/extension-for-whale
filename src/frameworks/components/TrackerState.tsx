@@ -80,9 +80,9 @@ const TrackerState = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {progresses.map((progress) => {
+                  {progresses.map((progress, i) => {
                     return (
-                      <tr>
+                      <tr key={i}>
                         <td>
                           <p>[{progress.state.name}]</p>
                           <p>{progress.time}</p>
