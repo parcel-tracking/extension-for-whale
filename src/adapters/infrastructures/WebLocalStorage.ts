@@ -38,10 +38,13 @@ export default class WebLocalStorage implements IWebLocalStorage {
 
   clear(): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      new LayerDTO({
-        isError: true,
-        message: "Failed to delete value from web storage."
-      })
+      localStorage.clear()
+      resolve(
+        new LayerDTO({
+          isError: true,
+          message: "Failed to delete value from web storage."
+        })
+      )
     })
   }
 }
