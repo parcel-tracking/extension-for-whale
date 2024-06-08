@@ -5,73 +5,43 @@ import IWebLocalStorage from "./interfaces/IWebLocalStorage"
 export default class WebLocalStorage implements IWebLocalStorage {
   getItem(key: string): Promise<ILayerDTO<string | null>> {
     return new Promise((resolve) => {
-      try {
-        const data = localStorage.getItem(key)
-        resolve(
-          new LayerDTO({
-            data
-          })
-        )
-      } catch {
+      const data = localStorage.getItem(key)
+      resolve(
         new LayerDTO({
-          isError: true,
-          message: "Failed to retrieve value from web storage."
+          data
         })
-      }
+      )
     })
   }
 
   setItem(key: string, value: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      try {
-        localStorage.setItem(key, value)
-        resolve(
-          new LayerDTO({
-            data: true
-          })
-        )
-      } catch {
+      localStorage.setItem(key, value)
+      resolve(
         new LayerDTO({
-          isError: true,
-          message: "Failed to save value from web storage."
+          data: true
         })
-      }
+      )
     })
   }
 
   removeItem(key: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      try {
-        localStorage.removeItem(key)
-        resolve(
-          new LayerDTO({
-            data: true
-          })
-        )
-      } catch {
+      localStorage.removeItem(key)
+      resolve(
         new LayerDTO({
-          isError: true,
-          message: "Failed to delete value from web storage."
+          data: true
         })
-      }
+      )
     })
   }
 
   clear(): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      try {
-        localStorage.clear()
-        resolve(
-          new LayerDTO({
-            data: true
-          })
-        )
-      } catch {
-        new LayerDTO({
-          isError: true,
-          message: "Failed to delete value from web storage."
-        })
-      }
+      new LayerDTO({
+        isError: true,
+        message: "Failed to delete value from web storage."
+      })
     })
   }
 }

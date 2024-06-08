@@ -13,34 +13,47 @@ export default class CarrierRepository implements ICarrierRepository {
   }
 
   async getCarriers(): Promise<ILayerDTO<ICarrier[]>> {
-    const res = await this.clientHTTP.get(`${API_URL}/carriers`)
-    const { isError, message, data } = await res.json()
-
-    if (isError) {
+    try {
+      const res = await this.clientHTTP.get(`${API_URL}/carriers`)
+      const { isError, message, data } = await res.json()
+      if (isError) {
+        return new LayerDTO({
+          isError,
+          message
+        })
+      } else {
+        return new LayerDTO({
+          data
+        })
+      }
+    } catch (error) {
       return new LayerDTO({
-        isError,
-        message
+        isError: true,
+        message: error.message
       })
     }
-
-    return new LayerDTO({
-      data
-    })
   }
 
   async getCarrier(carrierId: string): Promise<ILayerDTO<ICarrier>> {
-    const res = await this.clientHTTP.get(`${API_URL}/carrier/${carrierId}`)
-    const { isError, message, data } = await res.json()
+    try {
+      const res = await this.clientHTTP.get(`${API_URL}/carrier/${carrierId}`)
+      const { isError, message, data } = await res.json()
 
-    if (isError) {
+      if (isError) {
+        return new LayerDTO({
+          isError,
+          message
+        })
+      } else {
+        return new LayerDTO({
+          data
+        })
+      }
+    } catch (error) {
       return new LayerDTO({
-        isError,
-        message
+        isError: true,
+        message: error.message
       })
     }
-
-    return new LayerDTO({
-      data
-    })
   }
 }

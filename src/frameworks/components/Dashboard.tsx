@@ -24,7 +24,7 @@ const generateUUID = (): string => {
 
 const Dashboard = () => {
   const [selectBoxOpenIdx, setSelectBoxOpenIdx] = useState(0)
-  const [isErrorMessage, setIsErrorMessage] = useState(false)
+  const [isErrorMessage, setIsErrorMessage] = useState("")
   const [trackerList, setTrackerList] = useState<ITrackerDTO[]>([])
   const [carrierList, setCarreirList] = useState<ICarrierDTO[]>([])
 
@@ -34,11 +34,11 @@ const Dashboard = () => {
   }
 
   const handleClickClearErrorMessage = () => {
-    setIsErrorMessage(false)
+    setIsErrorMessage("")
   }
 
-  const showErrorMessage = () => {
-    setIsErrorMessage(true)
+  const showErrorMessage = (message = "error") => {
+    setIsErrorMessage(message)
   }
 
   useEffect(() => {
@@ -46,8 +46,11 @@ const Dashboard = () => {
   }, [])
 
   const getCarrierList = async () => {
-    const { isError, data } = await ctrl.carrier.getCarriers()
-    if (isError) return
+    const { isError, message, data } = await ctrl.carrier.getCarriers()
+    if (isError) {
+      showErrorMessage(message)
+      return
+    }
     setCarreirList(data)
   }
 
@@ -79,7 +82,10 @@ const Dashboard = () => {
 
   const getTrackerList = async () => {
     const { isError, data } = await ctrl.tracker.getTrackers()
-    if (isError) return
+    if (isError) {
+      showErrorMessage()
+      return
+    }
     setTrackerList(data)
   }
 
@@ -90,10 +96,9 @@ const Dashboard = () => {
         {isErrorMessage && (
           <$errorMessage>
             <p>
-              알 수 없는 오류가 발생하였습니다.
-              <br />
-              오류가 반복될 경우 아래의 <strong>[초기화]</strong>를 진행해
-              주세요.
+              {isErrorMessage === "error"
+                ? "알 수 없는 오류가 발생하였습니다."
+                : isErrorMessage}
             </p>
             <div onClick={handleClickClearErrorMessage}>
               <CloseIcon />

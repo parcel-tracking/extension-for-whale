@@ -31,6 +31,7 @@ const TrackerBox = ({
   showErrorMessage
 }: IProps) => {
   const [isTrackerState, setTrackerState] = useState(false)
+  const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
   const [label, setLabel] = useState(tracker.label)
   const [memos, setMemos] = useState(tracker.memos)
 
@@ -55,15 +56,18 @@ const TrackerBox = ({
   const handleChangeTrackingNumber = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const cacheNumber = trackingNumber
+    const newNumber = e.target.value
+    setTrackingNumber(newNumber)
     const { isError } = await ctrl.tracker.updateTrackingNumber(
       tracker,
-      e.target.value
+      newNumber
     )
     if (isError) {
       showErrorMessage()
+      setTrackingNumber(cacheNumber)
       return
     }
-    getTrackerList()
   }
 
   const handleClickDeleteTracker = async (id: string) => {
@@ -90,7 +94,6 @@ const TrackerBox = ({
 
   const handleClickNewWindowTracker = (carrier: ICarrierDTO) => {
     const { popupURL } = carrier
-    const { trackingNumber } = tracker
 
     window.open(
       popupURL + trackingNumber,
@@ -100,7 +103,7 @@ const TrackerBox = ({
   }
 
   const handleClickInlineTracker = () => {
-    if (tracker.trackingNumber === "") {
+    if (trackingNumber === "") {
       return
     }
     setTrackerState(false)
@@ -208,7 +211,7 @@ const TrackerBox = ({
       <$codeBox>
         <$codeInput
           type="text"
-          value={tracker.trackingNumber}
+          value={trackingNumber}
           onChange={(e) => handleChangeTrackingNumber(e)}
           placeholder="운송장 번호를 입력해주세요."
         />
@@ -229,7 +232,7 @@ const TrackerBox = ({
       {isTrackerState && (
         <TrackerState
           carrierId={carrier.id}
-          trackerTrackingNumber={tracker.trackingNumber}
+          trackerTrackingNumber={trackingNumber}
           closeFnc={handleClickCloseTracker}
         />
       )}
