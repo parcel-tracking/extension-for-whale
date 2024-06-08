@@ -41,8 +41,7 @@ export default class WebLocalStorage implements IWebLocalStorage {
       localStorage.clear()
       resolve(
         new LayerDTO({
-          isError: true,
-          message: "Failed to delete value from web storage."
+          data: true
         })
       )
     })
