@@ -11,3 +11,25 @@ as the name is changed.
   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
+
+This project contains components that use different licenses:
+
+### react
+react is licensed under the MIT License.
+For more information, see https://github.com/facebook/react/blob/main/LICENSE
+
+### emotion
+emotion is licensed under the MIT License.
+For more information, see https://github.com/emotion-js/emotion/blob/main/LICENSE
+
+### webpack
+webpack is licensed under the MIT License.
+For more information, see https://github.com/webpack/webpack/blob/main/LICENSE
+
+### html-webpack-plugin
+html-webpack-plugin is licensed under the MIT License.
+For more information, see https://github.com/jantimon/html-webpack-plugin/blob/main/LICENSE
+
+### ts-loader
+ts-loader is licensed under the MIT License.
+For more information, see https://github.com/TypeStrong/ts-loader/blob/main/LICENSE
