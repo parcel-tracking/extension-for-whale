@@ -116,12 +116,15 @@ const spin = keyframes`
 const $stateArea = styled.div`
   border-top: 1px solid #eee;
   padding: 20px 0;
+  @media (prefers-color-scheme: dark) {
+    border-color: rgb(85, 85, 85);
+  }
 `
 
 const $stateBox = styled.div`
   height: 200px;
   overflow: auto;
-  padding: 0 10px 0 0;
+  padding: 0 15px 0 0;
 `
 
 const $stateSummary = styled.div`
@@ -169,10 +172,20 @@ const $closeBtn = styled.button`
   padding: 0;
   background: #f5f5f5;
   border: 1px solid #ddd;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgb(44, 44, 44);
+    color: #ddd;
+    border-color: rgb(85, 85, 85);
+  }
 `
 
 const $errorMessage = styled.p`
   padding: 0 2px;
   color: #bbb;
   font-size: 13px;
+
+  @media (prefers-color-scheme: dark) {
+    color: #ddd;
+  }
 `

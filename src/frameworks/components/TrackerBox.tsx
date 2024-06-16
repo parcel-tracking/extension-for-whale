@@ -253,6 +253,10 @@ const $trackerBox = styled.div`
       opacity: 1;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    background: rgb(55, 55, 55);
+  }
 `
 
 const $deleteBtn = styled.span`
@@ -273,6 +277,10 @@ const $deleteBtn = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgb(160, 160, 160);
+  }
 `
 
 const $labelArea = styled.div`
@@ -299,6 +307,11 @@ const $memoInput = styled.input`
   padding: 0 2px;
   border: 0;
   outline: none;
+  background: transparent;
+
+  @media (prefers-color-scheme: dark) {
+    color: #bbb;
+  }
 `
 
 const $labelInput = styled.input`
@@ -310,6 +323,11 @@ const $labelInput = styled.input`
   padding: 0 2px;
   border: 0;
   outline: none;
+  background: transparent;
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
 `
 
 const $memoBox = styled.div`
@@ -332,6 +350,12 @@ const $closeMemo = styled.div`
     margin-top: 1px;
     opacity: 0.5;
   }
+
+  @media (prefers-color-scheme: dark) {
+    svg {
+      stroke: #eee;
+    }
+  }
 `
 
 const $selectArea = styled.div`
@@ -345,6 +369,11 @@ const $selectTitle = styled.p`
   padding: 0 15px;
   border: 1px solid #ddd;
   cursor: pointer;
+
+  @media (prefers-color-scheme: dark) {
+    border-color: rgb(85, 85, 85);
+    color: #fff;
+  }
 `
 
 const $selectArrow = styled.span`
@@ -374,6 +403,13 @@ const $selectBox = styled.ul<{ isShow: boolean }>`
   border-bottom: 1px solid #ddd;
   display: none;
   ${(props) => props.isShow && "display: block;"}
+
+  @media (prefers-color-scheme: dark) {
+    // background: rgb(55, 55, 55);
+    // background: rgb(41, 41, 41);
+    border-color: rgb(85, 85, 85);
+    color: #fff;
+  }
 `
 
 const $selectList = styled.li`
@@ -386,6 +422,15 @@ const $selectList = styled.li`
   }
   &:last-child {
     border-bottom: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    // background: rgb(55, 55, 55);
+    background: rgb(55, 55, 55);
+    border-color: rgb(85, 85, 85);
+    &:hover {
+      background: rgb(65, 65, 65);
+    }
   }
 `
 
@@ -402,8 +447,15 @@ const $codeInput = styled.input`
   padding: 0 15px;
   border: 1px solid #ddd;
   border-right: 0;
-  font-size: 14px;
+  font-size: 15px;
   outline: none;
+  letter-spacing: 0.3px;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgb(55, 55, 55);
+    border-color: rgb(85, 85, 85);
+    color: #fff;
+  }
 `
 
 const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
@@ -412,7 +464,7 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
   padding: 0;
   background: #00dc9b;
   color: #fff;
-  width: 20%;
+  width: 30%;
   font-size: 14px;
   cursor: pointer;
   text-shadow: 0px 0px 1px #075c43;
@@ -423,12 +475,27 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
     `
     background: #f5f5f5;
     border: 1px solid #ddd;
+    border-right: 0;
+    border-top-color: rgb(220, 220, 220);
+    border-bottom-color: rgb(220, 220, 220);
     text-shadow: none;
     color: #000;
     font-weight: 500;
     &:hover {
       background: #eaeaea;
     }
+    @media (prefers-color-scheme: dark) {
+      background: rgb(44, 44, 44);
+      color: #ddd;
+      border-color: rgb(85, 85, 85);
+      border-right: 0;
+      border-top-color: rgb(50, 50, 50);
+      border-bottom-color: rgb(50, 50, 50);
+      &:hover {
+        background: rgb(30, 30, 30);
+      }
+    }
+
   `}
   transition: all 0.3s;
   &:hover {

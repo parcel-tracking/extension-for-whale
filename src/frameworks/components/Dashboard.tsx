@@ -159,6 +159,10 @@ const $title = styled.h1`
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   color: #000;
   line-height: 49px;
+  @media (prefers-color-scheme: dark) {
+    background: rgb(55, 55, 55);
+    color: #fff;
+  }
 `
 
 const $errorMessage = styled.div`

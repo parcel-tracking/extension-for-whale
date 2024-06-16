@@ -39,6 +39,11 @@ const $tipMessageArea = styled.section`
   padding: 0 20px;
   font-size: 12px;
   color: #444;
+
+  @media (prefers-color-scheme: dark) {
+    color: #ddd;
+  }
+
   p {
     margin: 4px 0;
     line-height: 18px;
