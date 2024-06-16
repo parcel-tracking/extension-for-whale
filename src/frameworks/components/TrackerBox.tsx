@@ -451,6 +451,10 @@ const $codeInput = styled.input`
   outline: none;
   letter-spacing: 0.3px;
 
+  &::placeholder {
+    font-size: 13px;
+  }
+
   @media (prefers-color-scheme: dark) {
     background: rgb(55, 55, 55);
     border-color: rgb(85, 85, 85);
@@ -465,6 +469,7 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
   background: #00dc9b;
   color: #fff;
   width: 30%;
+  min-width: 65px;
   font-size: 14px;
   cursor: pointer;
   text-shadow: 0px 0px 1px #075c43;
