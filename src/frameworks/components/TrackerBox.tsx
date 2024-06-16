@@ -469,7 +469,7 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
   background: #00dc9b;
   color: #fff;
   width: 30%;
-  min-width: 65px;
+  min-width: 60px;
   font-size: 14px;
   cursor: pointer;
   text-shadow: 0px 0px 1px #075c43;
